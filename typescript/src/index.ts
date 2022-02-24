@@ -1,4 +1,12 @@
 /*
+    Segundo entregable del curso de backend en NodeJS de Coderhouse
+    Alumno: Facundo Abdo
+    Profe: Mauricio Espinosa
+    Comisión: 20655
+    Tema: Nuevas funcionalidades de ECMAScript y Typescript
+ */
+
+/*
   Importamos la clase base de las operaciones
   ya que sabemos que la vamos a usar si o si 
  */
