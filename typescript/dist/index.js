@@ -36,10 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+/*
+  Definimos una ruta base para ir a buscar
+  las implementaciones para cada operación
+*/
 var rutaBaseModuloCalculo = "./calculos/";
+//Función que ejecuta una operación
 var operacion = function (num1, num2, tipoOperacion) {
     var promise = new Promise(function (resolve, reject) { return __awaiter(void 0, void 0, void 0, function () {
-        var operacionesPermitidas, tipoCalculo, delegate;
+        var operacionesPermitidas, tipoCalculo, calculo;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -48,8 +53,15 @@ var operacion = function (num1, num2, tipoOperacion) {
                     return [4 /*yield*/, Promise.resolve().then(function () { return require(rutaBaseModuloCalculo + tipoOperacion); })];
                 case 1:
                     tipoCalculo = _a.sent();
-                    delegate = new tipoCalculo["default"](num1, num2);
-                    resolve(delegate.resultado());
+                    try {
+                        calculo = new tipoCalculo["default"](num1, num2);
+                        //Ejecutamos la operación
+                        resolve(calculo.resultado());
+                    }
+                    catch (e) {
+                        //Manejamos errores
+                        reject(e);
+                    }
                     _a.label = 2;
                 case 2:
                     reject("La operación no está permitida");
@@ -59,6 +71,7 @@ var operacion = function (num1, num2, tipoOperacion) {
     }); });
     return promise;
 };
+//Función que invoca la ejecución de las operaciones
 var operaciones = function () { return __awaiter(void 0, void 0, void 0, function () {
     var resultado1, e_1, resultado2, e_2, resultado3, e_3;
     return __generator(this, function (_a) {

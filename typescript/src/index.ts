@@ -1,19 +1,38 @@
+/*
+  Importamos la clase base de las operaciones
+  ya que sabemos que la vamos a usar si o si 
+ */
 import { Calculo } from "./calculos/calculo";
 
+/*
+  Definimos una ruta base para ir a buscar 
+  las implementaciones para cada operación 
+*/
 const rutaBaseModuloCalculo = "./calculos/";
 
+//Función que ejecuta una operación
 const operacion = (
   num1: number,
   num2: number,
   tipoOperacion: string
 ): Promise<number> => {
   const promise: Promise<number> = new Promise(async (resolve, reject) => {
+    //Definimos una lista de operaciones permitidas
     const operacionesPermitidas = ["suma", "resta"];
 
+    //Si la operación está en la lista se intenta la ejecución
     if (operacionesPermitidas.includes(tipoOperacion)) {
+      //Generamos la ubicación del módulo dinámicamente y lo importamos
       let tipoCalculo = await import(rutaBaseModuloCalculo + tipoOperacion);
-      const delegate: Calculo = new tipoCalculo.default(num1, num2);
-      resolve(delegate.resultado());
+      try {
+        //Creamos la instancia de la clase importada dinámicamente
+        const calculo: Calculo = new tipoCalculo.default(num1, num2);
+        //Ejecutamos la operación
+        resolve(calculo.resultado());
+      } catch (e) {
+        //Manejamos errores
+        reject(e);
+      }
     }
 
     reject("La operación no está permitida");
@@ -22,6 +41,7 @@ const operacion = (
   return promise;
 };
 
+//Función que invoca la ejecución de las operaciones
 const operaciones = async () => {
   try {
     let resultado1: number = await operacion(1, 2, "suma");
@@ -36,7 +56,7 @@ const operaciones = async () => {
   } catch (e) {
     console.log(e);
   }
-  
+
   try {
     let resultado3: number = await operacion(2, 1, "multiplicacion");
     console.log(`El resultado de la operación 3 es ${resultado3}`);
