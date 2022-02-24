@@ -56,6 +56,16 @@ var operacion = function (num1, num2, tipoOperacion) {
                     try {
                         calculo = new tipoCalculo["default"](num1, num2);
                         //Ejecutamos la operación
+                        /*
+                          Acá está dando el siguiente error
+                
+                          error TS2445: Property 'resultado' is protected and only
+                          accessible within class 'Calculo' and its subclasses.
+                
+                          Imagino que es porque al ser un import dinámico el compilador de TS
+                          no sabe que tipo de dato es y no entiende que es una subclase de la
+                          clase Calculo, pero en tiempo de ejecución funciona.
+                        */
                         resolve(calculo.resultado());
                     }
                     catch (e) {
