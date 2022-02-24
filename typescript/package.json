@@ -1,0 +1,25 @@
+{
+  "name": "coderhouse-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facuabdo/CoderhouseBackendNodeJS.git"
+  },
+  "author": "Facundo Abdo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/facuabdo/CoderhouseBackendNodeJS/issues"
+  },
+  "homepage": "https://github.com/facuabdo/CoderhouseBackendNodeJS#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.21"
+  }
+}

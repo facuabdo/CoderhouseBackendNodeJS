@@ -1,2 +1,7 @@
+.git
+node_modules
 .nvmrc
+.npmrc
+package-lock.json
+tsconfig.json
 **/no-entregables/
