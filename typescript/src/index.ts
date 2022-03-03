@@ -6,11 +6,7 @@
     Tema: Nuevas funcionalidades de ECMAScript y Typescript
  */
 
-/*
-  Importamos la clase base de las operaciones
-  ya que sabemos que la vamos a usar si o si 
- */
-import { Calculo } from "./calculos/calculo";
+import { ICalculo } from "./calculos/icalculo";
 
 /*
   Definimos una ruta base para ir a buscar 
@@ -34,18 +30,8 @@ const operacion = (
       let tipoCalculo = await import(rutaBaseModuloCalculo + tipoOperacion);
       try {
         //Creamos la instancia de la clase importada dinámicamente
-        const calculo: Calculo = new tipoCalculo.default(num1, num2);
+        const calculo: ICalculo = new tipoCalculo.default(num1, num2);
         //Ejecutamos la operación
-        /*
-          Acá está dando el siguiente error
-
-          error TS2445: Property 'resultado' is protected and only 
-          accessible within class 'Calculo' and its subclasses.
-
-          Imagino que es porque al ser un import dinámico el compilador de TS
-          no sabe que tipo de dato es y no entiende que es una subclase de la
-          clase Calculo, pero en tiempo de ejecución funciona.
-        */
         resolve(calculo.resultado());
       } catch (e) {
         //Manejamos errores

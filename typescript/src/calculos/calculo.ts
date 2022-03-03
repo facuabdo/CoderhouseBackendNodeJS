@@ -6,6 +6,4 @@ export abstract class Calculo {
     this.argumento1 = argumento1;
     this.argumento2 = argumento2;
   }
-
-  protected abstract resultado(): number;
 }
