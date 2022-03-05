@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input /><span></span>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/8.0.0-alpha.2/rxjs.umd.js"></script>
+    <script>
+        const { fromEvent, Observable } = rxjs;
+        const { map, switchMap } = rxjs.operators;
+
+        const timeout = 30000;
+
+        const input = document.getElementsByTagName('input')[0];
+        const span = document.getElementsByTagName('span')[0];
+
+        const observableInput = fromEvent(input, 'input').pipe(
+            switchMap((evento) => new Observable(observer => {
+                let texto = evento.target.value;
+                if (texto === 'error') {
+                    observer.error('El usuario ingresó error');
+                } else if (texto === 'complete') {
+                    console.log('Debería ejecutarse el complete pero vaya a saber por qué no pasa.')
+                    //debería ser observer.complete(); pero no funciona
+                    complete();
+                } else { observer.next(texto); }
+            })));
+
+        const observer = {
+            next: next,
+            error: error,
+            complete: complete
+        }
+
+        setTimeout(() => {
+            suscripcion.unsubscribe();
+            input.disabled = true;
+            span.innerHTML = '';
+            console.info('La suscripción finalizó');
+        }, timeout);
+
+        const suscripcion = observableInput.subscribe(observer);
+
+        function next(texto) {
+            span.innerHTML = texto.split('').reverse().join('');
+        }
+
+        function error(error) {
+            console.error(error);
+            input.disabled = true;
+            span.innerHTML = '';
+        }
+
+        function complete() {
+            console.info('Observable completado.');
+            input.disabled = true;
+            span.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>

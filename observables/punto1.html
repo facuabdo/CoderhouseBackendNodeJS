@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input /><span></span>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/8.0.0-alpha.2/rxjs.umd.min.js"></script>
+<script>
+    const { fromEvent } = rxjs;
+
+    const input = document.getElementsByTagName('input')[0];
+    const span = document.getElementsByTagName('span')[0];
+
+    const observableInput = fromEvent(input, 'input');
+
+    const next = (evento) => {
+        let texto = evento.target.value;
+
+        if (texto === 'error') {
+            console.error('El usuario ingresó error');
+            suscripcion.unsubscribe();
+        } else if (texto === 'complete') {
+            console.info('El observable ya no emite más valores');
+            suscripcion.unsubscribe();
+        } else
+            span.innerHTML = texto.split('').reverse().join('');
+    }
+
+    const suscripcion = observableInput.subscribe(next)
+
+    setTimeout(() => {
+        suscripcion.unsubscribe();
+        input.disabled = true;
+        span.innerHTML = '';
+        console.info('La suscripción finalizó');
+    }, 10000)
+</script>
+
+</html>
