@@ -15,6 +15,8 @@
 <script>
     const { fromEvent } = rxjs;
 
+    const timeout = 30000;
+
     const input = document.getElementsByTagName('input')[0];
     const span = document.getElementsByTagName('span')[0];
 
@@ -40,7 +42,7 @@
         input.disabled = true;
         span.innerHTML = '';
         console.info('La suscripción finalizó');
-    }, 10000)
+    }, timeout)
 </script>
 
 </html>
