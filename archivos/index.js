@@ -72,6 +72,8 @@ const fs = require("fs");
   ];
 
   const archivo = new Archivo("productos.txt");
+  //Para ilustrar mejor el ejercicio hacemos todo sincrónico en una IIFE async
+  //para poder mostrar mejor cada paso.
   productos.forEach(async (prod) => await archivo.guardar(prod));
   await archivo.leer();
   await archivo.borrar();
