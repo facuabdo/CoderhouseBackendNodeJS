@@ -1,55 +1,6 @@
-const fs = require("fs");
+import { Archivo } from "./archivo.class.js";
 
 (async () => {
-  class Archivo {
-    constructor(nombre) {
-      this.nombre = nombre;
-    }
-
-    getFilePath() {
-      return baseFileDir + this.nombre;
-    }
-
-    async leer() {
-      try {
-        console.log("Leyendo archivo...");
-        const contenido = await fs.promises.readFile(this.getFilePath(), {
-          encoding: "utf-8",
-        });
-        console.log(JSON.parse(contenido));
-        console.log("Archivo leido.");
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    async guardar(producto) {
-      try {
-        console.log("Guardando producto...");
-        productosArchivo.push({ id: productosArchivo.length + 1, ...producto });
-        await fs.promises.writeFile(
-          this.getFilePath(),
-          JSON.stringify(productosArchivo)
-        );
-        console.log("Producto guardado.");
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    async borrar() {
-      try {
-        console.log("Borrando archivos...");
-        await fs.promises.unlink(this.getFilePath());
-        console.log("Archivo borrado.");
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-
-  const baseFileDir = "./temp/";
-  const productosArchivo = [];
-
   const productos = [
     {
       price: 234.56,
@@ -74,7 +25,11 @@ const fs = require("fs");
   const archivo = new Archivo("productos.txt");
   //Para ilustrar mejor el ejercicio hacemos todo sincrónico en una IIFE async
   //para poder mostrar mejor cada paso.
-  productos.forEach(async (prod) => await archivo.guardar(prod));
+
+  for (const prod of productos) {
+    await archivo.guardar(prod);
+  }
+
   await archivo.leer();
   await archivo.borrar();
   await archivo.leer();
