@@ -1,14 +1,14 @@
 import fs from "fs";
 
 export class Archivo {
-  constructor(nombre) {
+  constructor(nombre, baseDir) {
     this.nombre = nombre;
-    this.baseFileDir = "./temp/";
+    this.baseFileDir = baseDir ?? "";
     this.productosArchivo = [];
   }
 
   getFilePath() {
-    return this.baseFileDir + this.nombre;
+    return "./" + this.baseFileDir + "/" + this.nombre;
   }
 
   async leer() {
@@ -17,8 +17,10 @@ export class Archivo {
       const contenido = await fs.promises.readFile(this.getFilePath(), {
         encoding: "utf-8",
       });
-      console.log(JSON.parse(contenido));
+      const contenidoJSON = JSON.parse(contenido);
+      console.log(contenidoJSON);
       console.log("Archivo leido.");
+      return contenidoJSON;
     } catch (error) {
       console.log(error);
     }

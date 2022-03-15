@@ -22,7 +22,7 @@ import { Archivo } from "./archivo.class.js";
     },
   ];
 
-  const archivo = new Archivo("productos.txt");
+  const archivo = new Archivo("productos.txt", "temp");
   //Para ilustrar mejor el ejercicio hacemos todo sincrónico en una IIFE async
   //para poder mostrar mejor cada paso.
 
