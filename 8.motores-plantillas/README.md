@@ -1,0 +1,1 @@
+Se entrega vacío por cambio de plan del curso.
