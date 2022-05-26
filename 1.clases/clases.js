@@ -1,8 +1,7 @@
 /*
     Primer entregable del curso de backend en NodeJS de Coderhouse
     Alumno: Facundo Abdo
-    Profe: Mauricio Espinosa
-    Comisión: 20655
+    Comisión: 30995
     Tema: Clases en ES6
  */
 
